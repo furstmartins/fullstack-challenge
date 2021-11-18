@@ -1,0 +1,52 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row m-t-5">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Contact Name</label>
+                    <input id="contactName" class="form-control" type="text" th:field="*{order.contactName}" readonly />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Contact Phone</label>
+                    <input id="contactPhone" class="form-control" type="text" th:field="*{order.contactPhone}" readonly />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Real Estate Agency</label>
+                    <input id="realEstateAgency" class="form-control" type="text" th:field="*{order.realEstateAgency}" readonly />
+                </div>
+            </div>
+        </div>
+        <div class="row m-t-5">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label>Order Description</label>
+                    <textarea id="orderDescription" class="form-control" rows="5" th:field="*{order.description}" readonly></textarea>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Company</label>
+                    <input id="company" class="form-control" type="text" th:field="*{order.company}" readonly />
+                </div>
+            </div>
+        </div>
+        <div class="row m-t-5">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label>Category</label>
+                    <input id="category" class="form-control" type="text" th:field="*{order.category.desc}" readonly />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Deadline</label>
+                    <span class="form-control" th:text="${#dates.format(order.deadline, 'dd/MM/yyyy')}" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

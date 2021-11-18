@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: '@active.profile@'
+
+
+#mvn clean package spring-boot:repackage -Dactive.profile=prod
+#java -jar target/sysorder.war
+
+#mvn clean package spring-boot:repackage -Dspring-boot.run.profiles=prod
+#mvn clean package spring-boot:repackage -Dspring.profiles.active=prod
+
+#-Drun.arguments=--spring.profiles.active=dev
+
+#java -jar target/sysorder.war -Dspring.profiles.active=dev

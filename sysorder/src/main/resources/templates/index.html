@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>SysOrder</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/assets/plugins/sweetalert/sweetalert2.min.css}">
+        <link rel="stylesheet" th:href="@{/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.css}">
+        <link rel="stylesheet" th:href="@{/assets/plugins/datatables.net-bs4/css/responsive.dataTables.min.css}">
+    </head>
+    <body class="fix-header">
+        <div id="main-wrapper">
+            <header class="topheader" id="top">
+                <div class="fix-width">
+                    <nav class="navbar navbar-expand-md navbar-light p-l-0">
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                            <ul class="navbar-nav ml-auto stylish-nav">
+                                <li class="nav-item" style="margin-right: 0.5em;">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNewOrder">Open new order</button>
+                                    <button id="btOpenOrder" type="button" data-toggle="modal" data-target="#modalOpenOrder" style="display: none">Open order</button>
+                                    <th:block th:replace="_modals :: modal('modalNewOrder')">modal</th:block>
+                                    <th:block th:replace="_modals :: modal('modalOpenOrder')">modal</th:block>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+            <div class="page-wrapper" style="margin-left: 0px; margin-top: 15px">
+                <div class="container-fluid">
+                    <div class="fix-width">
+                        <div class="row banner-text">
+                            <div class="col-lg-12 m-t-20">
+                                <input id="inputSelectedOrderId" type="hidden">
+                                <table id="tbOrders" class="table color-table info-table table-striped table-bordered" style="margin-left: 0em !important; margin-top: -1em !important;" width="100%">
+                                    <thead style="background-color: #1e88e5">
+                                        <tr style="font: menu;">
+                                            <th><h6 class="m-b-0 text-white">ID</h6></th>
+                                            <th><h6 class="m-b-0 text-white">Category</h6></th>
+                                            <th><h6 class="m-b-0 text-white">Contact</h6></th>
+                                            <th><h6 class="m-b-0 text-white">Agency</h6></th>
+                                            <th><h6 class="m-b-0 text-white">Company</h6></th>
+                                            <th><h6 class="m-b-0 text-white">Deadline</h6></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="order : ${orders}"  style="font: menu; cursor: pointer">
+                                            <td th:text="${order.id}" th:data-id="${order.id}" onclick="selectOrder(this.getAttribute('data-id'))"> order id </td>
+                                            <td th:text="${order.category.desc}" th:data-id="${order.id}" onclick="selectOrder(this.getAttribute('data-id'))"> desc category </td>
+                                            <td th:text="${order.contactName}" th:data-id="${order.id}" onclick="selectOrder(this.getAttribute('data-id'))"> contact name </td>
+                                            <td th:text="${order.realEstateAgency}" th:data-id="${order.id}" onclick="selectOrder(this.getAttribute('data-id'))"> agency </td>
+                                            <td th:text="${order.company}" th:data-id="${order.id}" onclick="selectOrder(this.getAttribute('data-id'))"> company </td>
+                                            <td th:text="${#dates.format(order.deadline, 'dd/MM/yyyy')}" th:data-id="${order.id}" onclick="selectOrder(this.getAttribute('data-id'))"> deadline </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script th:src="@{/assets/plugins/jquery/jquery.min.js}"></script>
+        <script th:src="@{/assets/plugins/popper/popper.min.js}"></script>
+        <script th:src="@{/assets/plugins/bootstrap/js/bootstrap.min.js}"></script>
+        <script th:src="@{/assets/plugins/sweetalert/sweetalert2.all.min.js}"></script>
+        <script th:src="@{/assets/plugins/datatables.net-bs4/js/jquery.dataTables.min.js}"></script>
+        <script th:src="@{/assets/plugins/datatables.net-bs4/js/dataTables.responsive.min.js}"></script>
+        <script th:src="@{/js/order.min.js}"></script>
+
+        <script>
+            $('#modalNewOrder').on('show.bs.modal', function () {
+                $.get("/modals/newOrder", function (data) {
+                    $('#modalNewOrder').find('.modal-body').html(data);
+                    $('#modalNewOrder').find('.modal-title').html('New Order');
+                })
+            });
+
+            $('#modalOpenOrder').on('show.bs.modal', function () {
+                var orderId = $('#inputSelectedOrderId').val();
+                $.get("/modals/modal-open-order/" + orderId, function (data) {
+                    $('#modalOpenOrder').find('.modal-body').html(data);
+                    $('#modalOpenOrder').find('.modal-title').html('Order Details');
+                    $('#modalOpenOrder').find('.modal-footer').hide();
+                })
+            })
+        </script>
+    </body>
+</html>
