@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <!-- Modal -->
+        <div th:fragment="modal(id)" class="modal fade" th:id="${id}" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal_lg">
+                <div class="modal-content" style="width: 70em; margin: auto; padding:15px">
+                    <fieldset style="border:1px; border-style: solid">
+                        <legend style="width:90px; margin-left:15px;font-size:15px"><div class="modal-title"></div></legend>
+                        <div class="modal-body">
+                            Content here
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary btn-save-order" onclick="saveOrder()">Save</button>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,55 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row m-t-5">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Contact Name</label>
+                    <input id="contactName" class="form-control" type="text" required />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Contact Phone</label>
+                    <input id="contactPhone" class="form-control" type="text" required />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Real Estate Agency</label>
+                    <input id="realEstateAgency" class="form-control" type="text" />
+                </div>
+            </div>
+        </div>
+        <div class="row m-t-5">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label>Order Description</label>
+                    <textarea id="orderDescription" class="form-control" rows="5" ></textarea>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Company</label>
+                    <input id="company" class="form-control" type="text" />
+                </div>
+            </div>
+        </div>
+        <div class="row m-t-5">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label>Select the order category</label>
+                    <select id="category" class="form-control" required>
+                        <option label=""></option>
+                            <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.desc}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Deadline</label>
+                    <input id="deadline" class="form-control" type="date" required />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
